@@ -29,14 +29,26 @@ class WorldGenerator {
 
   generateEntity(terrain) {
     // Generar entidades basadas en el tipo de terreno actual
-    if (terrain == 'water') {
+    if (terrain === 'water') {
       return null; // No generar entidad sobre agua
-    } else if (terrain == 'sand') {
-      return Math.random() < 0.1 ? 'palmTree' : null; // Generar palmera con una probabilidad del 10% en terreno de arena
-    } else if (terrain == 'grass') {
-      return Math.random() < 0.2 ? 'flower' : null; // Generar flor con una probabilidad del 20% en terreno de césped
-    } else if (terrain == 'mountain') {
-      return Math.random() < 0.05 ? 'rock' : null; // Generar roca con una probabilidad del 5% en terreno de montaña
+    } else if (terrain === 'sand') {
+      if (Math.random() < 0.1) {
+        return 'palmTree'; // Generar palmera con una probabilidad del 10% en terreno de arena
+      } else if (Math.random() < 0.05) {
+        return 'crab'; // Generar cangrejo con una probabilidad del 5% en terreno de arena
+      }
+    } else if (terrain === 'grass') {
+      if (Math.random() < 0.2) {
+        return 'flower'; // Generar flor con una probabilidad del 20% en terreno de césped
+      } else if (Math.random() < 0.1) {
+        return 'butterfly'; // Generar mariposa con una probabilidad del 10% en terreno de césped
+      }
+    } else if (terrain === 'mountain') {
+      if (Math.random() < 0.05) {
+        return 'rock'; // Generar roca con una probabilidad del 5% en terreno de montaña
+      } else if (Math.random() < 0.03) {
+        return 'eagle'; // Generar águila con una probabilidad del 3% en terreno de montaña
+      }
     }
 
 
