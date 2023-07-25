@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pixel Game</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:3000');
+    console.log("llamando ws");
+    ws.onopen = () => {
+      console.log('WebSocket connected');
+      // Envia un mensaje JSON al servidor WebSocket con las coordenadas iniciales y el tamaño de la vista
+      const message = JSON.stringify({ x: 0, y: 0, viewWidth: 50, viewHeight: 45   });
+      ws.send(message);
+    };
+
+    ws.onmessage = (event) => {
+      const worldView = JSON.parse(event.data);
+      renderWorldView(worldView.view);
+    };
+
+    console.log("ws after");
+
+    function renderWorldView(worldView) {
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const cellSize = 15;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let y = 0; y < worldView.length; y++) {
+        for (let x = 0; x < worldView[y].length; x++) {
+          const cell = worldView[y][x];
+          const terrain = cell.terrain;
+
+          switch (terrain) {
+            case 'water':
+              ctx.fillStyle = 'blue';
+              break;
+            case 'sand':
+              ctx.fillStyle = 'yellow';
+              break;
+            case 'grass':
+              ctx.fillStyle = 'green';
+              break;
+            case 'mountain':
+              ctx.fillStyle = 'gray';
+              break;
+            default:
+              ctx.fillStyle = 'white';
+              break;
+          }
+
+          ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+
+          if (cell.entity === 'tree') {
+            ctx.fillStyle = 'brown';
+            ctx.fillRect(x * cellSize + 7, y * cellSize + 3, 6, 14);
+            ctx.fillStyle = 'green';
+            ctx.fillRect(x * cellSize + 4, y * cellSize, 12, 10);
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
