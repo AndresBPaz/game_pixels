@@ -1,0 +1,42 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  canvas {
+    display: block;
+    background-color: black;
+    /* Establecer las dimensiones del lienzo para que ocupen todo el ancho y alto de la pantalla */
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  /* Estilo para la barra de zoom */
+  #zoomBarContainer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    background-color: #eee; /* Fondo gris para la barra de zoom */
+    padding: 5px; /* Añadir un pequeño espacio interno */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilo para los botones de desplazamiento */
+  #zoomOutBtn, #zoomInBtn {
+    font-size: 18px;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .arrowBtn {
+    font-size: 18px;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
