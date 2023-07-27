@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="utf-8">
   <title>Pixel Game</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -9,11 +10,15 @@
 
   <!-- Barra de zoom -->
   <div id="zoomBarContainer">
+    <Label id="valuewh" for="zoomBar">zoomLevel: 1</Label>
     <div id="zoomOutBtn">-</div>
-    <input type="range" id="zoomBar" min="1" max="5" value="1" step="0.1">
+    <input type="range" id="zoomBar" name="zoomBar" class="zoomBar" min="1" max="10" value="1" step="1">
     <div id="zoomInBtn">+</div>
+    <label for="posx" class="x" id="x">x: 0</label>
+    <label for="posy" class="y" id="y">y: 0</label>
   </div>
 
+  <script src="terrain.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
